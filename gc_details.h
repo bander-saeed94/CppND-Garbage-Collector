@@ -1,6 +1,9 @@
+#ifndef GC_DETAILS_H
+#define GC_DETAILS_H
 // This class defines an element that is stored
 // in the garbage collection information list.
 //
+#include <iostream>
 template <class T>
 class PtrDetails
 {
@@ -18,10 +21,11 @@ array, then arraySize contains its size */
     // If this is an array, then size specifies
     // the size of the array.
 
-    PtrDetails(void)
-    {
-        // TODO: Implement PtrDetails
-    }
+    PtrDetails(T *ptr, int size): memPtr(ptr), arraySize(size){
+        if(size > 0) isArray = true;
+        else isArray = false;
+        refcount = 1;
+    };
 };
 // Overloading operator== allows two class objects to be compared.
 // This is needed by the STL list class.
@@ -30,4 +34,7 @@ bool operator==(const PtrDetails<T> &ob1,
                 const PtrDetails<T> &ob2)
 {
     // TODO: Implement operator==
+    return ob1.memPtr == ob2.memPtr;
 }
+
+#endif
